@@ -2,18 +2,15 @@
 import { Context } from "@/app/layout";
 import Link from "next/link";
 import { Router, useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import useLocalStroge from "./useLocalStroge";
 
 export default function Header() {
-  const {
-    clickAdd,
-    setClickAdd,
-    dashboard,
-    setDashboard,
-    isprofile,
-    setIsProfile,
-  } = useContext(Context);
+  const { clickAdd, setClickAdd, isprofile, setIsProfile } =
+    useContext(Context);
   const router = useRouter();
+
+  const { getItem, setItem } = useLocalStroge("value");
 
   return (
     <section className="w-full h-[72px] bg-white flex justify-between px-[120px] items-center relative">
@@ -22,18 +19,22 @@ export default function Header() {
         <p
           className="text-[#0F172A] text-[16px]"
           onClick={() => {
-            !dashboard ? setDashboard(true) : "", router.push("/dashboard");
+            !getItem() ? setItem(true) : "",
+              router.push("/dashboard"),
+              setItem(true);
           }}
-          style={{ fontWeight: dashboard ? "600" : "400" }}
+          style={{ fontWeight: getItem() ? "600" : "400" }}
         >
           Dashboard
         </p>
         <p
           className="text-[#0F172A] text-[16px] font-[400]"
           onClick={() => {
-            dashboard ? setDashboard(false) : "", router.push("/records");
+            getItem() ? setItem(false) : "",
+              router.push("/records"),
+              setItem(false);
           }}
-          style={{ fontWeight: !dashboard ? "600" : "400" }}
+          style={{ fontWeight: !getItem() ? "600" : "400" }}
         >
           Records
         </p>

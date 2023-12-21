@@ -9,7 +9,6 @@ export const Context = createContext();
 
 export default function RootLayout({ children }) {
   const [clickAdd, setClickAdd] = useState(false);
-  const [dashboard, setDashboard] = useState(true);
   const [isExpense, setIsExpense] = useState(true);
   const [isAdd, setIsAdd] = useState(false);
   const [isprofile, setIsProfile] = useState(false);
@@ -36,11 +35,6 @@ export default function RootLayout({ children }) {
       console.log("Error", err);
     }
   };
-
-  const SignUp = () => {
-    setIsLoggedIn(true);
-    localStorage.setItem("token", "abc");
-  };
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -63,8 +57,6 @@ export default function RootLayout({ children }) {
         signUp,
         clickAdd,
         setClickAdd,
-        dashboard,
-        setDashboard,
         isExpense,
         setIsExpense,
         isAdd,

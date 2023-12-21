@@ -6,7 +6,7 @@ import LastRecord from "./last_records";
 
 export default function Dashboard() {
   return (
-    <div className="flex flex-col gap-[24px] w-full px-[120px]">
+    <div className="flex flex-col gap-[24px] w-full px-[120px] m-auto">
       <div className="w-full h-fit flex flex-row gap-[20px] mt-[32px]">
         <Card_1/>
         <Card_2/>
