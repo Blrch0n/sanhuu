@@ -21,7 +21,7 @@ export default function AddRecords() {
         <hr></hr>
         <div className="w-full h-full flex">
           <div className="h-[444px] w-[396px] rounded-[12px] px-[24px] py-[20px] flex flex-col gap-[20px]">
-            <span className="w-[348px] h-[40px] rounded-[100px] flex flex-row gap-[4px]">
+            <span className="w-[348px] h-[40px] rounded-[100px] flex flex-row gap-[4px] bg-[#F3F4F6]">
               <button
                 className="h-full w-full bg-[#0166FF] rounded-[20px] font-[400]"
                 style={{

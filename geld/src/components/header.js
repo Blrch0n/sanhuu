@@ -1,17 +1,22 @@
+"use client";
 import { Context } from "@/app/layout";
 import Link from "next/link";
 import { Router, useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export default function Header() {
-  const { clickAdd, setClickAdd, dashboard, setDashboard } =
-    useContext(Context);
+  const {
+    clickAdd,
+    setClickAdd,
+    dashboard,
+    setDashboard,
+    isprofile,
+    setIsProfile,
+  } = useContext(Context);
   const router = useRouter();
 
-  
-
   return (
-    <section className="w-full h-[72px] bg-white flex justify-between px-[120px] items-center">
+    <section className="w-full h-[72px] bg-white flex justify-between px-[120px] items-center relative">
       <span className="max-w-fit h-fit flex justify-between items-center gap-[24px]">
         <img src="/dashboard_logo.svg"></img>
         <p
@@ -42,12 +47,37 @@ export default function Header() {
         >
           &#43; Records
         </button>
-        <div className="avatar">
+        <div
+          className="avatar"
+          onClick={() => {
+            setIsProfile(!isprofile);
+          }}
+        >
           <div className="w-[40px] rounded-full">
             <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
           </div>
         </div>
       </div>
+      {isprofile && (
+        <div className="w-fit h-fit flex flex-col  gap-[8px] p-[12px] absolute bottom-[-120px] rounded-[12px] right-[120px] bg-white">
+          <span
+            className="w-[200px] h-[40px] cursor-pointer flex items-center "
+            onClick={() => {
+              router.push("/"), setIsProfile(!isprofile);
+            }}
+          >
+            Profile
+          </span>
+          <span
+            className="w-[200px] h-[40px] cursor-pointer flex items-center"
+            onClick={() => {
+              router.push("/"), setIsProfile(!isprofile);
+            }}
+          >
+            Exit
+          </span>
+        </div>
+      )}
     </section>
   );
 }
