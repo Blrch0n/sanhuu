@@ -9,11 +9,12 @@ import Today from "@/components/today";
 import Yesterday from "@/components/yesterday";
 import { useContext } from "react";
 import { Context } from "../layout";
+import AddCatergory from "@/components/addCategory";
 
 export default function RecordsPage() {
-  const {clickAdd, setClickAdd} =useContext(Context);
+  const {clickAdd, setClickAdd,isAdd, setIsAdd} =useContext(Context);
   return (
-    <section className="w-full h-fit bg-[#F3F4F6] min-h-screen">
+    <section className="w-full h-fit bg-[#F3F4F6] min-h-screen relative">
       <Header></Header>
       <section className="w-full h-fit flex flex-row gap-[24px] py-[24px] px-[120px]">
         <section className="max-w-[283px] h-fit py-[24px] px-[16px] bg-white flex flex-col gap-[40px] rounded-[12px]">
@@ -28,6 +29,7 @@ export default function RecordsPage() {
         </section>
       </section>
       {clickAdd && <AddRecords></AddRecords>}
+      {isAdd && <AddCatergory></AddCatergory>}
     </section>
   );
 }

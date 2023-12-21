@@ -1,11 +1,20 @@
+import { useContext } from "react";
 import Types from "./types";
+import { Context } from "@/app/layout";
 
 export default function Record() {
+  const { isAdd, setIsAdd } = useContext(Context);
+
   return (
     <section className="w-full h-fit flex flex-col gap-[24px]">
       <h2 className="text-[24px] font-[600]">Records</h2>
       <div className="flex flex-col w-full gap-[24px]">
-        <button className="bg-[#0166FF] text-white rounded-[20px] font-[400] text-[16px] text-[#fff]">
+        <button
+          className="bg-[#0166FF] text-white rounded-[20px] font-[400] text-[16px] text-[#fff] h-[32px]"
+          onClick={() => {
+            !isAdd ? setIsAdd(true) : ''
+          }}
+        >
           + Add
         </button>
         <input

@@ -1,11 +1,14 @@
 import { Context } from "@/app/layout";
 import Link from "next/link";
-import { Router } from "next/router";
+import { Router, useRouter } from "next/navigation";
 import { useContext } from "react";
 
 export default function Header() {
   const { clickAdd, setClickAdd, dashboard, setDashboard } =
     useContext(Context);
+  const router = useRouter();
+
+  
 
   return (
     <section className="w-full h-[72px] bg-white flex justify-between px-[120px] items-center">
@@ -14,25 +17,21 @@ export default function Header() {
         <p
           className="text-[#0F172A] text-[16px]"
           onClick={() => {
-            !dashboard ? setDashboard(true) : "",Router.push('/dashboard')
+            !dashboard ? setDashboard(true) : "", router.push("/dashboard");
           }}
           style={{ fontWeight: dashboard ? "600" : "400" }}
         >
           Dashboard
         </p>
-        <Link
-          href="/records"
+        <p
+          className="text-[#0F172A] text-[16px] font-[400]"
           onClick={() => {
-            dashboard ? setDashboard(false) : "";
+            dashboard ? setDashboard(false) : "", router.push("/records");
           }}
+          style={{ fontWeight: !dashboard ? "600" : "400" }}
         >
-          <p
-            className="text-[#0F172A] text-[16px] font-[400]"
-            style={{ fontWeight: !dashboard ? "600" : "400" }}
-          >
-            Records
-          </p>
-        </Link>
+          Records
+        </p>
       </span>
       <div className="max-w-[163px] h-[40px] flex flex-row gap-[24px] justify-between items-center">
         <button

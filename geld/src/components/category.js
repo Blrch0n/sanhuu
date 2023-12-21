@@ -1,3 +1,6 @@
+import { Context } from "@/app/layout";
+import { useContext, useState } from "react";
+
 const data = [
   { img: "view_logo.svg", type: "Food & Drinks", arrow_img: "arrow.svg" },
   { img: "view_logo.svg", type: "Shopping", arrow_img: "arrow.svg" },
@@ -17,6 +20,9 @@ const data = [
 ];
 
 export default function Category() {
+
+  const {isAdd,setIsAdd} = useContext(Context);
+
   return (
     <section className="flex flex-col ">
       <span className="flex flex-row justify-between w-full">
@@ -35,7 +41,10 @@ export default function Category() {
             <img src={props.arrow_img}></img>
           </div>
         ))}
-        <div className="flex flex-row gap-[8px] text-[#1F2937] text-[16px] font-[400]">
+        <div className="flex flex-row gap-[8px] text-[#1F2937] text-[16px] font-[400] cursor-pointer"
+        onClick={()=>{
+          !isAdd ? setIsAdd(true):'';
+        }}>
           + Add Category
         </div>
       </div>

@@ -6,12 +6,14 @@ import Card_3 from "@/components/card_3";
 import IncomeExpense from "@/components/income_expense";
 import LastRecord from "@/components/last_records";
 import Balance from "@/components/balance";
+import AddCatergory from "@/components/addCategory";
 
 export default function Home() {
   return (
     <section className="w-[fit] h-[fit] flex flex-col ">
       {/* <Balance></Balance> */}
       <Login></Login>
+      {/* <AddCatergory></AddCatergory> */}
       {/* <Header></Header>
       <div className="flex flex-col gap-[24px] w-full px-[120px]">
         <div className="w-full h-fit flex flex-row gap-[20px] mt-[32px]">
