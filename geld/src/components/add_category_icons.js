@@ -45,10 +45,16 @@ const color_data = [
 ];
 
 export default function AddCatergoryIcons(props) {
-  const { categoryValueAdd, setCategoryValueAdd, color_, setColor } =
-    useContext(Context);
+  const {
+    categoryValueAdd,
+    setCategoryValueAdd,
+    color_,
+    setColor,
+    isIcon,
+    setIsIcon,
+  } = useContext(Context);
 
-  const style = { color: color_, size: 84 };
+  const style = { color: color_ };
   const data = [
     <TiHome {...{ style }} />,
     <MdHomeFilled {...{ style }} />,
@@ -82,14 +88,15 @@ export default function AddCatergoryIcons(props) {
     <FaPencilAlt {...{ style }} />,
   ];
   return (
-    <div className="w-[312px] h-[336px] bg-white flex flex-col p-[24px] absolute top-[48px] left-[0px] border-[2px] rounded-lg border-black">
+    <div className="w-[312px] h-[336px] bg-white flex flex-col p-[24px] absolute top-[74px] left-[22px] border-[2px] rounded-lg border-black">
       <div className="grid grid-row-5 grid-cols-6 h-[264px] w-full">
         {data.map((icon, index) => (
           <div
             key={index}
             className="w-[24px] h-[24px] cursor-pointer"
             onClick={() => {
-              setCategoryValueAdd(index);
+              setCategoryValueAdd(icon);
+              setIsIcon(!isIcon);
             }}
           >
             {icon}

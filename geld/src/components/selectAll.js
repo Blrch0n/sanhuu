@@ -1,4 +1,8 @@
+import { Context } from "@/app/layout";
+import { useContext } from "react";
+
 export default function SelectAll(props) {
+  const {isSelectAll,setIsSelectAll} = useContext(Context);
   return (
     <section className="w-full h-fit flex flex-col ">
       <div className="w-full h-[48px] flex flex-row justify-between items-center rounded-[12px] bg-white px-[24px] py-[12px]">
@@ -6,6 +10,7 @@ export default function SelectAll(props) {
           <input
             type="checkbox"
             className="w-[24px] h-[24px] bg-[#1F2937]"
+            // {...{isSelectAll}?{data}:''}
           ></input>
           <p className="text-[16px] font-[400]">Select All</p>
         </span>

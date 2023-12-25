@@ -1,6 +1,13 @@
+'use client'
 import Link from "next/link";
+import { useContext, useState } from "react";
+import { Context } from "../layout";
 
 export default function Home() {
+  const { Login } = useContext(Context);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <section className="w-[100%] h-screen flex bg-[#0166FF] justify-start">
       <span className="w-[50%] h-full bg-white pt-[276.84px] pl-[222px]">
@@ -19,16 +26,25 @@ export default function Home() {
               type="text"
               placeholder="Name"
               className="w-full h-[48px] px-[16px] py-[12px] bg-[#F3F4F6] text-[#D1D5DB] rounded-[8px]"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             ></input>
             <input
               type="text"
               placeholder="Email"
               className="w-full h-[48px] px-[16px] py-[12px] bg-[#F3F4F6] text-[#D1D5DB] rounded-[8px]"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             ></input>
             <input
               type="text"
               placeholder="Password"
               className="w-full h-[48px] px-[16px] py-[12px] bg-[#F3F4F6] text-[#D1D5DB] rounded-[8px]"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             ></input>
             <input
               type="text"
@@ -39,6 +55,10 @@ export default function Home() {
               type="submit"
               value="Log in"
               className="w-full h-[48px] m-auto py-[10px] bg-[#0166FF] text-white rounded-[20px]"
+              onClick={(e)=>{
+                e.preventDefault()
+                Login(name,email,password)
+              }}
             ></input>
           </div>
           <span className="max-w-fit h-fit text-[16px] text-[#0F172A] font-[400]">

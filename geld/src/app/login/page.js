@@ -61,7 +61,7 @@ export default function Login() {
               href="/signup"
               className="text-[#0166FF] text-[16px] font-[400]"
             >
-              Log in
+              Sign up
             </Link>
           </span>
         </div>
