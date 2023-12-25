@@ -26,7 +26,8 @@ export default function Balance (props){
             </span>
             <button
               className="w-full h-[48px] m-auto py-[10px] bg-[#0166FF] text-white rounded-[20px] mt-[32px] cursor-pointer"
-              onClick={() => {
+              onClick={(event) => {
+                event.preventDefault()
                 props.setPage_(props.page_ + 1);
               }}
             >Confirm</button>

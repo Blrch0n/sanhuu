@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { Context } from "../layout";
 
 export default function Login() {
-  const { signUp } = useContext(Context);
+  const { signUp, getItem, setItem} = useContext(Context);
 
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -16,7 +16,7 @@ export default function Login() {
   return (
     <section className="w-[100%] h-screen flex bg-[#0166FF] justify-start">
       <span className="w-[50%] h-full bg-white pt-[276.84px] pl-[222px]">
-        <form className="max-w-[384px] min-h-[554.31px] flex flex-col items-center gap-[40px]">
+        <div className="max-w-[384px] min-h-[554.31px] flex flex-col items-center gap-[40px]">
           <img src="logo.svg" className="w-[92.34px] h-[34.31px]"></img>
           <div className="max-w-fit h-fit flex justify-center flex-col">
             <h2 className="text-[#0F172A] text-[24px] font-[600] m-auto">
@@ -50,8 +50,10 @@ export default function Login() {
               onClick={(event) => {
                 event.preventDefault();
                 signUp(username, password);
+                getItem() ? router.push("/balance") : setItem(false);
               }}
             ></input>
+            
           </div>
           <span className="max-w-fit h-fit text-[16px] text-[#0F172A] font-[400]">
             Already have account?
@@ -62,7 +64,7 @@ export default function Login() {
               Log in
             </Link>
           </span>
-        </form>
+        </div>
       </span>
     </section>
   );

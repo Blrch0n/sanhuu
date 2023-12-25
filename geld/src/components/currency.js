@@ -15,7 +15,7 @@ export default function Currency(props) {
         </span>
         <span className="max-w-full h-fit flex flex-col gap-[12px] mt-[24px]">
           <select className="select select-bordered w-full h-[64px] text-[#1F2937] text-[16px] font-[600]">
-            <option selected>MNT - Mongolian Tugrik</option>
+            <option>MNT - Mongolian Tugrik</option>
             <option>USD</option>
             <option>RG</option>
           </select>
@@ -26,7 +26,8 @@ export default function Currency(props) {
         </span>
         <button
           className="w-full h-[48px] m-auto py-[10px] bg-[#0166FF] text-white rounded-[20px] mt-[32px] cursor-pointer"
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault()
             props.setPage_(props.page_ + 1);
           }}
         >

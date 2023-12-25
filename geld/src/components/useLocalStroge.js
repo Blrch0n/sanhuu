@@ -10,6 +10,7 @@ export default function useLocalStroge(props) {
     try {
       const item = window.localStorage.getItem(props);
       return item ? JSON.parse(item) : undefined;
+
     } catch (error) {
       console.log(error);
     }

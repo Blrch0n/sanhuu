@@ -1,10 +1,21 @@
 import { Context } from "@/app/layout";
 import { useContext, useState } from "react";
+import AddCatergoryScroll from "./add_category";
 
 export default function AddRecords() {
-  const { clickAdd, setClickAdd, isExpense, setIsExpense } =
-    useContext(Context);
-  console.log(clickAdd);
+  const {
+    clickAdd,
+    setClickAdd,
+    isExpense,
+    setIsExpense,
+    category_value,
+    setCategoryValue,
+    category_name,
+    setCategoryName,
+  } = useContext(Context);
+
+  const [isCategory, setIsCategory] = useState(false);
+
   return (
     <div className="absolute w-full h-full flex items-center justify-center top-0 bg-[#00000080]">
       <form className="w-[792px] h-[512px] bg-white rounded-[12px]">
@@ -13,7 +24,8 @@ export default function AddRecords() {
           <img
             src="X.svg"
             className="cursor-pointer"
-            onClick={() => {
+            onClick={(event) => {
+              event.preventDefault();
               clickAdd ? setClickAdd(false) : "";
             }}
           ></img>
@@ -61,11 +73,19 @@ export default function AddRecords() {
             </span>
             <span className="w-full h-fit flex flex-col gap-[8px]">
               <p className="text-[#1F2937] font-[500] text-[16px]">Category</p>
-              <select className="select select-bordered w-full max-w-full h-[48px]">
-                <option>Food & Drinks</option>
-                <option>Han Solo</option>
-                <option>Greedo</option>
-              </select>
+              <div
+                className="select select-bordered w-full max-w-full h-[48px] relative"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsCategory(!isCategory);
+                }}
+              >
+                <div className="absolute top-[10px] left-[16px] w-full flex flex-row gap-[12px]">
+                  <img src={`/${category_value}`}></img>
+                  <p>{category_name}</p>
+                </div>
+                {isCategory && <AddCatergoryScroll />}
+              </div>
             </span>
             <div className="w-full h-fit flex flex-row gap-[12px]">
               <span className="w-full h-fit flex flex-col gap-[8px]">

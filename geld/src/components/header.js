@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import useLocalStroge from "./useLocalStroge";
 
 export default function Header() {
-  const { clickAdd, setClickAdd, isprofile, setIsProfile } =
+  const { clickAdd, setClickAdd, isprofile, setIsProfile, token } =
     useContext(Context);
   const router = useRouter();
 
@@ -23,7 +23,7 @@ export default function Header() {
               router.push("/dashboard"),
               setItem(true);
           }}
-          style={{ fontWeight: getItem() ? "600" : "400" }}
+          style={{ fontWeight: getItem() ? "800" : "400" }}
         >
           Dashboard
         </p>
@@ -34,7 +34,7 @@ export default function Header() {
               router.push("/records"),
               setItem(false);
           }}
-          style={{ fontWeight: !getItem() ? "600" : "400" }}
+          style={{ fontWeight: !getItem() ? "800" : "400" }}
         >
           Records
         </p>
