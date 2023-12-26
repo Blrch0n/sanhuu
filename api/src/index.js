@@ -13,16 +13,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 app.post("/login", (req, res) => {
-  const { email_, password_, name_ } = req.body;
-
-  const token_ = jwt.sign({ email_, password_ }, "secret-key", {
-    expiresIn: "24h",
-  });
-  res.json({
-    token_,q
-  });
+  
 });
-
 app.post("/sign-in", (req, res) => {
   const headers = req.headers;
 
@@ -42,6 +34,11 @@ app.post("/sign-in", (req, res) => {
     });
     return;
   }
+  // const { email, password, } = req.body;
+
+  // const token = jwt.sign({ email, password }, "secret-key", {
+  //   expiresIn: "24h",
+  // });
   res.json({
     token,
   });

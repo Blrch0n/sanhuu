@@ -12,6 +12,7 @@ export default function AddRecords() {
     setCategoryValue,
     category_name,
     setCategoryName,
+    setIsAdd,
   } = useContext(Context);
 
   const [isCategory, setIsCategory] = useState(false);
@@ -81,7 +82,11 @@ export default function AddRecords() {
                 }}
               >
                 <div className="absolute top-[10px] left-[16px] w-full flex flex-row gap-[12px]">
-                  <img src={`/${category_value}`}></img>
+                  {category_value == "" ? (
+                    <p>Choose</p>
+                  ) : (
+                    <img src={`/${category_value}`}></img>
+                  )}
                   <p>{category_name}</p>
                 </div>
                 {isCategory && <AddCatergoryScroll />}

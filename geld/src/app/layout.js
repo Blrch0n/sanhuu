@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { TiHome } from "react-icons/ti";
 import { createContext, useContext, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import useLocalStroge from "@/components/useLocalStroge";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
   const [color_, setColor] = useState("#000000");
   const [isSelectAll, setIsSelectAll] = useState(true);
 
-  const { getItem, setItem } = useLocalStroge("isLogginIn");
+  const usePathName = usePathname()
 
   const signUp = async (email, password) => {
     try {
@@ -37,14 +37,13 @@ export default function RootLayout({ children }) {
         {
           headers: {
             authorization:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkFkbWluIiwicGFzc3dvcmQiOiJBZG1pbiIsImlhdCI6MTcwMzUwMjMyMCwiZXhwIjoxNzAzNTg4NzIwfQ.QeXBdovn5c9APBbfMOWNyVI9_bsgpTGW-e_aC26SH8U",
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTcwMzU1MzAwMiwiZXhwIjoxNzAzNjM5NDAyfQ.3L9aIsVWtwdyj-dF3gDLZu7lAef-kKt81VMRQmtrBKI",
           },
         }
       );
 
-      const { token } = data;
-
-      console.log(token);
+      const { replay } = data;
+      console.log(replay);
     } catch (err) {
       console.log("Error", err);
     }
@@ -88,8 +87,6 @@ export default function RootLayout({ children }) {
         setIsAdd,
         isprofile,
         setIsProfile,
-        getItem,
-        setItem,
         isIcon,
         setIsIcon,
         category_value,
@@ -103,6 +100,7 @@ export default function RootLayout({ children }) {
         color_,
         setColor,
         Login,
+        usePathName,
       }}
     >
       <html lang="en">

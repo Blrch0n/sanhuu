@@ -1,6 +1,13 @@
+import { Context } from "@/app/layout";
+import { useContext } from "react";
+
 const data = [1, 2, 3, 4, 5];
 
 export default function Today() {
+  const {isSelectAll} = useContext(Context)
+  // const isAll = () =>{
+  //   isSelectAll ? selected: '';
+  // }
   return (
     <section className="w-full h-fit flex flex-col gap-[12px]">
       <h2 className="text-[16px] font-[600]">Today</h2>
@@ -10,6 +17,7 @@ export default function Today() {
             <input
               type="checkbox"
               className="w-[24px] h-[24px] bg-[#1F2937]"
+              // {...isAll}
             ></input>
             <img src="/lending.svg" className="w-[40px] h-[40px]"></img>
             <span>

@@ -10,7 +10,9 @@ export default function SelectAll(props) {
           <input
             type="checkbox"
             className="w-[24px] h-[24px] bg-[#1F2937]"
-            // {...{isSelectAll}?{data}:''}
+            onClick={()=>{
+              setIsSelectAll(!isSelectAll);
+            }}
           ></input>
           <p className="text-[16px] font-[400]">Select All</p>
         </span>
