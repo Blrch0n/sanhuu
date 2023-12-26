@@ -1,48 +1,94 @@
-const express = require("express");
-const app = express();
-const port = 3002;
-const bodyParser = require("body-parser");
-var jwt = require("jsonwebtoken");
+const fs = require("fs").promises;
 
-var cors = require("cors");
+const { v4: uuidv4 } = require("uuid");
+
+const express = require("express");
+
+const cors = require("cors");
+const bodyParser = require("body-parser");
+
+const jwt = require("jsonwebtoken");
+
+const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-app.post("/login", (req, res) => {
-  
-});
-app.post("/sign-in", (req, res) => {
-  const headers = req.headers;
+app.post("/sign-in", async (req, res) => {
+  const { email, password } = req.body;
 
-  const a = headers.authorization;
+  const filePath = "src/data/users.json";
 
-  if (!a) {
-    res.status(401).json({
-      message: "Unauthorized - 6",
+  const usersRaw = await fs.readFile(filePath, "utf8");
+
+  const users = JSON.parse(usersRaw);
+
+  const user = users.find((user) => user.email === email);
+
+  if (!user) {
+    return res.status(401).json({
+      message: "Unauthorized",
     });
-    return;
   }
-  try {
-    jwt.verify(a, "secret-key");
-  } catch (err) {
-    res.status(401).json({
-      message: "Unauthorized - 9",
-    });
-    return;
-  }
-  // const { email, password, } = req.body;
 
-  // const token = jwt.sign({ email, password }, "secret-key", {
-  //   expiresIn: "24h",
-  // });
+  if (user.password !== password) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+
+  const token = jwt.sign({ email }, "secret-key", { expiresIn: "1h" });
+
   res.json({
     token,
   });
 });
+
+app.post("/sign-up", async (req, res) => {
+  const { email, password } = req.body;
+
+  const filePath = "src/data/users.json";
+
+  const usersRaw = await fs.readFile(filePath, "utf8");
+
+  const users = JSON.parse(usersRaw);
+
+  const user = users.find((user) => user.email === email);
+
+  if (user) {
+    return res.status(409).json({
+      message: "User already exists",
+    });
+  }
+
+  const id = uuidv4();
+
+  users.push({
+    id,
+    email,
+    password,
+  });
+
+  await fs.writeFile(filePath, JSON.stringify(users));
+
+  res.json({
+    message: "User created",
+  });
+});
+
+app.get("/users", async (req, res) => {
+  const filePath = "src/data/users.json";
+
+  const usersRaw = await fs.readFile(filePath, "utf8");
+
+  const users = JSON.parse(usersRaw);
+
+  res.json({
+    users,
+  });
+});
+
+const port = 3002;
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

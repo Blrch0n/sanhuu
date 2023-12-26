@@ -6,6 +6,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import useLocalStroge from "@/components/useLocalStroge";
 import axios from "axios";
+import { AuthProvider } from "@/components/providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,56 +25,7 @@ export default function RootLayout({ children }) {
   const [color_, setColor] = useState("#000000");
   const [isSelectAll, setIsSelectAll] = useState(true);
 
-  const usePathName = usePathname()
-
-  const signUp = async (email, password) => {
-    try {
-      const { data } = await axios.post(
-        "http://localhost:3002/sign-in",
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            authorization:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTcwMzU1MzAwMiwiZXhwIjoxNzAzNjM5NDAyfQ.3L9aIsVWtwdyj-dF3gDLZu7lAef-kKt81VMRQmtrBKI",
-          },
-        }
-      );
-
-      const { replay } = data;
-      console.log(replay);
-    } catch (err) {
-      console.log("Error", err);
-    }
-  };
-  const Login = async (name_,email_, password_) => {
-    console.log(name_,email_,password_)
-    try {
-      const { data } = await axios.post("http://localhost:3002/login", {
-        email_,
-        password_,
-        name_,
-      });
-      const {token_} = data;
-      console.log(token_)
-    } catch (err) {
-      console.log('Error',err)
-    }
-  };
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-
-  //   fetch("http://localhost:3002")
-  //     .then((res) => res.text())
-  //     .then((data) => {
-  //       console.log(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error", err);
-  //     });
-  // }, []);
+  const usePathName = usePathname();
 
   return (
     <Context.Provider
@@ -104,7 +56,7 @@ export default function RootLayout({ children }) {
       }}
     >
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}><AuthProvider>{children}</AuthProvider></body>
       </html>
     </Context.Provider>
   );
