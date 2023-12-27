@@ -1,7 +1,6 @@
 "use client";
 
-import { api } from "@/common";
-import { Backdrop, CircularProgress } from "@mui/material";
+import { api } from "@/common/axios";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -28,6 +27,8 @@ export const AuthProvider = ({ children }) => {
 
       localStorage.setItem("token", token);
 
+      console.log(token);
+
       setIsLoggedIn(true);
 
       router.push("/dashboard");
@@ -38,11 +39,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signUp = async (email, password) => {
+  const signUp = async (name,email, password) => {
     setIsLoading(true);
 
     try {
       const { data } = await api.post("/sign-up", {
+        name,
         email,
         password,
       });
@@ -66,7 +68,8 @@ export const AuthProvider = ({ children }) => {
 
     setIsLoggedIn(false);
 
-    router.push("/sign-in");
+    router.push("/login");
+
   };
 
   useEffect(() => {
@@ -93,12 +96,12 @@ export const AuthProvider = ({ children }) => {
     >
       {isReady && children}
 
-      <Backdrop
+      {/* <Backdrop
         open={!isReady}
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <CircularProgress color="inherit" />
-      </Backdrop>
+      </Backdrop> */}
     </AuthContext.Provider>
   );
 };

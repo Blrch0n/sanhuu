@@ -1,18 +1,15 @@
 "use client";
 import { Content } from "next/font/google";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
-import { Context } from "../layout";
+import { useAuth } from "@/components/providers/AuthProvider";
 
 export default function Login() {
-  const { signUp, getItem, setItem} = useContext(Context);
+  const { signIn, isLoading } = useAuth();
 
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-
-  const router = useRouter();
-
+  
   return (
     <section className="w-[100%] h-screen flex bg-[#0166FF] justify-start">
       <span className="w-[50%] h-full bg-white pt-[276.84px] pl-[222px]">
@@ -30,6 +27,7 @@ export default function Login() {
             <input
               type="text"
               placeholder="Email"
+              value={username}
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
@@ -38,6 +36,7 @@ export default function Login() {
             <input
               type="password"
               placeholder="Password"
+              value={password}
               className="w-full h-[48px] px-[16px] py-[12px] bg-[#F3F4F6] text-[#D1D5DB] rounded-[8px]"
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -46,11 +45,10 @@ export default function Login() {
             <input
               type="submit"
               value="Log in"
+              loading={isLoading}
               className="w-full h-[48px] m-auto py-[10px] bg-[#0166FF] text-white rounded-[20px]"
-              onClick={(event) => {
-                event.preventDefault();
-                signUp(username, password);
-                getItem() ? router.push("/balance") : setItem(false);
+              onClick={() => {
+                signIn(username, password);
               }}
             ></input>
             

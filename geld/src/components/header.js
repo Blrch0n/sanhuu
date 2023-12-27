@@ -3,15 +3,28 @@ import { Context } from "@/app/layout";
 import Link from "next/link";
 import { Router, usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
+import { useAuth } from "./providers/AuthProvider";
+import { api } from "@/common/axios";
 
 const tabs = ["dashboard", "records"];
 
 export default function Header() {
   const { clickAdd, setClickAdd, isprofile, setIsProfile, usePathName } =
     useContext(Context);
+    const {signOut} = useAuth();
 
   const router = useRouter();
   const pathname = usePathname();
+
+  const asb = async () => {
+    const { data } = await api.get('/users');
+
+    const { users } = data;
+
+    console.log(users);
+
+
+  }
 
   return (
     <section className="w-full h-[72px] bg-white flex justify-between px-[120px] items-center relative">
@@ -53,7 +66,7 @@ export default function Header() {
           <span
             className="w-[200px] h-[40px] cursor-pointer flex items-center "
             onClick={() => {
-              router.push("/"), setIsProfile(!isprofile);
+              asb(), setIsProfile(!isprofile);
             }}
           >
             Profile
@@ -61,7 +74,7 @@ export default function Header() {
           <span
             className="w-[200px] h-[40px] cursor-pointer flex items-center"
             onClick={() => {
-              router.push("/"), setIsProfile(!isprofile);
+              signOut()
             }}
           >
             Exit

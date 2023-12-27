@@ -30,7 +30,7 @@ export default function AddCatergoryScroll(props) {
       <div
         className="h-[56px] w-full p-[16px]"
         onClick={() => {
-          setClickAdd(false), setIsAdd(true);
+           setIsAdd(true);
         }}
       >
         <div className="flex flex-row w-full h-full items-center gap-[12px]">

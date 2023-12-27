@@ -2,9 +2,10 @@
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { Context } from "../layout";
+import { useAuth } from "@/components/providers/AuthProvider";
 
 export default function Home() {
-  const { Login } = useContext(Context);
+  const { signUp, isLoading } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +26,7 @@ export default function Home() {
             <input
               type="text"
               placeholder="Name"
+              value={name}
               className="w-full h-[48px] px-[16px] py-[12px] bg-[#F3F4F6] text-[#D1D5DB] rounded-[8px]"
               onChange={(e) => {
                 setName(e.target.value);
@@ -33,6 +35,7 @@ export default function Home() {
             <input
               type="text"
               placeholder="Email"
+              value={email}
               className="w-full h-[48px] px-[16px] py-[12px] bg-[#F3F4F6] text-[#D1D5DB] rounded-[8px]"
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -41,6 +44,7 @@ export default function Home() {
             <input
               type="text"
               placeholder="Password"
+              value={password}
               className="w-full h-[48px] px-[16px] py-[12px] bg-[#F3F4F6] text-[#D1D5DB] rounded-[8px]"
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -54,10 +58,11 @@ export default function Home() {
             <input
               type="submit"
               value="Log in"
+              loading={isLoading}
               className="w-full h-[48px] m-auto py-[10px] bg-[#0166FF] text-white rounded-[20px]"
               onClick={(e)=>{
                 e.preventDefault()
-                Login(name,email,password)
+                signUp(name,email,password)
               }}
             ></input>
           </div>

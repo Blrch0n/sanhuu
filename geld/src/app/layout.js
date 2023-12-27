@@ -4,8 +4,6 @@ import "./globals.css";
 import { TiHome } from "react-icons/ti";
 import { createContext, useContext, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import useLocalStroge from "@/components/useLocalStroge";
-import axios from "axios";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -13,7 +11,6 @@ const inter = Inter({ subsets: ["latin"] });
 export const Context = createContext();
 
 export default function RootLayout({ children }) {
-  const router = useRouter();
   const [isIcon, setIsIcon] = useState(false);
   const [clickAdd, setClickAdd] = useState(false);
   const [isExpense, setIsExpense] = useState(true);
@@ -30,7 +27,6 @@ export default function RootLayout({ children }) {
   return (
     <Context.Provider
       value={{
-        signUp,
         clickAdd,
         setClickAdd,
         isExpense,
@@ -51,7 +47,6 @@ export default function RootLayout({ children }) {
         setIsSelectAll,
         color_,
         setColor,
-        Login,
         usePathName,
       }}
     >
