@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
 
     setIsLoggedIn(false);
 
-    router.push("/login");
+    router.push("/");
 
   };
 

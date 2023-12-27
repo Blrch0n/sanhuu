@@ -11,20 +11,10 @@ const tabs = ["dashboard", "records"];
 export default function Header() {
   const { clickAdd, setClickAdd, isprofile, setIsProfile, usePathName } =
     useContext(Context);
-    const {signOut} = useAuth();
+  const { signOut } = useAuth();
 
   const router = useRouter();
   const pathname = usePathname();
-
-  const asb = async () => {
-    const { data } = await api.get('/users');
-
-    const { users } = data;
-
-    console.log(users);
-
-
-  }
 
   return (
     <section className="w-full h-[72px] bg-white flex justify-between px-[120px] items-center relative">
@@ -66,7 +56,7 @@ export default function Header() {
           <span
             className="w-[200px] h-[40px] cursor-pointer flex items-center "
             onClick={() => {
-              asb(), setIsProfile(!isprofile);
+              router.push("/user_profile"), setIsProfile(!isprofile);
             }}
           >
             Profile
@@ -74,7 +64,7 @@ export default function Header() {
           <span
             className="w-[200px] h-[40px] cursor-pointer flex items-center"
             onClick={() => {
-              signOut()
+              signOut();
             }}
           >
             Exit

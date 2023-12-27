@@ -1,38 +1,8 @@
 [
   {
-    "id": "7e5895e1-7141-4220-a4fb-81eb0f33473a",
-    "name": "Bolorchuluun",
-    "email": "boloruugan25@gmail.com",
-    "password": "12345678"
-  },
-  {
-    "id": "299b482c-b132-4a46-a006-bee7af3c3cee",
-    "name": "bolor",
-    "email": "Bolordfasf@dfsa",
-    "password": "gfhdjka@"
-  },
-  {
-    "id": "489f9064-872f-43c3-9ae4-b4887fdf2f67",
+    "id": "11eb3660-2e9b-47b1-a297-aefce3823ea1",
     "name": "123",
-    "email": "123@",
-    "password": "1234"
-  },
-  {
-    "id": "102add2c-23b5-4a9a-aee7-70e7bc3c7837",
-    "name": "qw41",
-    "email": "4qwe",
-    "password": "ewqe"
-  },
-  {
-    "id": "b2ae90d1-217a-4763-b26c-3c384380efb6",
-    "name": "adf",
-    "email": "adg",
-    "password": "adg"
-  },
-  {
-    "id": "dd469d6b-5dae-49fe-9661-88e5da6546b1",
-    "name": "21321",
-    "email": "3123",
-    "password": "3112"
+    "email": "123",
+    "password": "123"
   }
 ]
