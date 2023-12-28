@@ -37,7 +37,7 @@ app.post("/sign-in", async (req, res) => {
     });
   }
 
-  const token = jwt.sign({ email }, "alkdgjkladjg", { expiresIn: "1h" });
+  const token = jwt.sign({ email }, "alkdgjkladjg");
 
   res.json({
     token,
@@ -45,7 +45,7 @@ app.post("/sign-in", async (req, res) => {
 });
 
 app.post("/sign-up", async (req, res) => {
-  const { name,email, password } = req.body;
+  const { name, email, password } = req.body;
 
   const filePath = "src/data/users.json";
 
@@ -72,7 +72,7 @@ app.post("/sign-up", async (req, res) => {
 
   await fs.writeFile(filePath, JSON.stringify(users));
 
-  const token = jwt.sign({ email }, "alkdgjkladjg", { expiresIn: "1h" });
+  const token = jwt.sign({ email }, "alkdgjkladjg");
 
   res.json({
     token,
@@ -122,60 +122,48 @@ app.post("/records", async (req, res) => {
 });
 
 app.get("/users", async (req, res) => {
-  const { authorization } =  req.body;
-
-  if(!authorization){
-    return res.status(401).json({
-      message:'Error',
-    })
-  }
-
-  try{
-
-    const check = jwt.verify(authorization,'alkdgjkladjg');
-
-    const {email} = check
-
-    const filePath = 'src/data/users.json'
-
-    const usersRaw = await fs.readFile(filePath,'utf-8');
-
-    const users = JSON.parse(usersRaw);
-
-    const profile = users.filter((user)=> user.email === email);
-
-    res.json({
-      profile:profile,
-    })
-  }catch(err){
-     return res.status(401).json({
-      message:'error'
-     })
-
-  }
-
-  const filePath = "src/data/users.json";
-
-  const usersRaw = await fs.readFile(filePath, "utf8");
-
-  const users = JSON.parse(usersRaw);
-
-  res.json({
-    users,
-  });
-});
-
-app.get("/records", async (req, res) => {
   const { authorization } = req.headers;
 
   if (!authorization) {
+    return res.status(401).json({
+      message: "Error",
+    });
+  }
+
+  try {
+    const check = jwt.verify(authorization, "alkdgjkladjg");
+
+    const { email } = check;
+
+    const filePath = "src/data/users.json";
+
+    const usersRaw = await fs.readFile(filePath, "utf-8");
+
+    const users = JSON.parse(usersRaw);
+
+    const profile = users.filter((user) => user.email === email);
+
+    res.json({
+      profile,
+    });
+  } catch (err) {
+    return res.status(401).json({
+      message: "error",
+    });
+  }
+});
+
+app.get("/records", async (req, res) => {
+  const { token } = req.headers;
+
+  if (!token) {
     return res.status(401).json({
       message: "Unauthorized",
     });
   }
 
   try {
-    const payload = jwt.verify(authorization, "alkdgjkladjg");
+    const payload = jwt.verify(token, "alkdgjkladjg");
 
     const { email } = payload;
 

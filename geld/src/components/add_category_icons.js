@@ -41,7 +41,6 @@ const color_data = [
   "#F9D100",
   "#FF7B01",
   "#AE01FF",
-  "#FF0101",
 ];
 
 export default function AddCatergoryIcons(props) {
