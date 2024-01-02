@@ -16,8 +16,9 @@ export default function RootLayout({ children }) {
   const [clickAdd, setClickAdd] = useState(false);
   const [isExpense, setIsExpense] = useState(true);
   const [isAdd, setIsAdd] = useState(false);
+  const [iconID, setIconID] = useState(0);
   const [isprofile, setIsProfile] = useState(false);
-  const [category_value, setCategoryValue] = useState("");
+  const [category_value, setCategoryValue] = useState(<TiHome />);
   const [category_name, setCategoryName] = useState("");
   const [categoryValueAdd, setCategoryValueAdd] = useState(<TiHome />);
   const [color_, setColor] = useState("#000000");
@@ -26,11 +27,12 @@ export default function RootLayout({ children }) {
   const [isReady, setIsReady] = useState(false);
   const [isReady_, setIsReady_] = useState(false);
   const [categoryData, setCategoryData] = useState();
+  const [categoryInputValue, setCategoryInputValue] = useState("");
 
   const usePathName = usePathname();
 
   const showOn = async () => {
-    setIsReady(false)
+    setIsReady(false);
     try {
       const token = localStorage.getItem("token");
       const { data } = await api.get("/records", {
@@ -40,21 +42,21 @@ export default function RootLayout({ children }) {
       });
       const { records } = data;
 
-      setRecordData(records);
+      setRecordData(records.reverse());
       setIsReady(true);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const AddCatergoryData = async (categoryValueAdd_, categoryInputValue) => {
+  const AddCatergoryData = async () => {
     try {
       const token = localStorage.getItem("token");
-      console.log(categoryValueAdd_)
-      const { data } = await api.post(
+      await api.post(
         "/category",
         {
-          categoryValueAdd_,
+          iconID,
+          color_,
           categoryInputValue,
         },
         {
@@ -69,7 +71,7 @@ export default function RootLayout({ children }) {
   };
 
   const getCategoryData = async () => {
-    setIsReady_(false)
+    setIsReady_(false);
     try {
       const token = localStorage.getItem("token");
       const { data } = await api.get("/category", {
@@ -78,7 +80,8 @@ export default function RootLayout({ children }) {
         },
       });
       const { userCategory } = data;
-      setCategoryData(userCategory);
+      setCategoryData(userCategory.reverse());
+      console.log(userCategory);
       setIsReady_(true);
     } catch (err) {
       console.log(err);
@@ -93,9 +96,12 @@ export default function RootLayout({ children }) {
         showOn,
         setRecordData,
         getCategoryData,
+        iconID,
+        setIconID,
         categoryData,
         isExpense,
         setIsExpense,
+        isReady_,
         isReady,
         setIsReady,
         isAdd,
@@ -105,6 +111,8 @@ export default function RootLayout({ children }) {
         setIsProfile,
         isIcon,
         setIsIcon,
+        categoryInputValue,
+        setCategoryInputValue,
         category_value,
         setCategoryValue,
         category_name,

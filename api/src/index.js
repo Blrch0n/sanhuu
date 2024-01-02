@@ -94,8 +94,15 @@ app.post("/records", async (req, res) => {
 
     const { email } = payload;
 
-    const { amount, date, isExpense, time, category_value, category_name } =
-      req.body;
+    const {
+      amount,
+      date,
+      iconID,
+      isExpense,
+      time,
+      category_value,
+      category_name,
+    } = req.body;
 
     const filePath = "src/data/records.json";
 
@@ -106,9 +113,9 @@ app.post("/records", async (req, res) => {
     records.push({
       amount,
       date,
+      iconID,
       isExpense,
       time,
-      category_value,
       category_name,
       userEmail: email,
     });
@@ -134,14 +141,15 @@ app.post("/category", async (req, res) => {
   try {
     const verify = jwt.verify(authorization, "alkdgjkladjg");
     const { email } = verify;
-    const { categoryValueAdd_, categoryInputValue } = req.body;
+    const { iconID, color_, categoryInputValue } = req.body;
     const filePath = "src/data/category.json";
     const rawFile = await fs.readFile(filePath, "utf8");
 
     const file = JSON.parse(rawFile);
 
     file.push({
-      categoryValueAdd_,
+      iconID,
+      color_,
       categoryInputValue,
       userEmail: email,
     });

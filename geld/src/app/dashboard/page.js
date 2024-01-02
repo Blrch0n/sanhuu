@@ -19,7 +19,7 @@ export default function Home() {
   if (!isLoggedIn) return null;
 
   return (
-    <section className="w-[fit] h-[fit] flex flex-col relative bg-[#F3F4F6]">
+    <section className="w-[fit] h-screen flex flex-col relative bg-[#F3F4F6]">
       <Header></Header>
       <Dashboard></Dashboard>
       {clickAdd && <AddRecords></AddRecords>}

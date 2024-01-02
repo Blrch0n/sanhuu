@@ -5,7 +5,7 @@ export default function LastRecord() {
   const { recordData ,isReady } = useContext(Context);
 
   return (
-    <div className="w-full h-fit bg-white rounded-[12px] px-[24px] py-[16px]">
+    <div className="w-full min-h-[400px] bg-white rounded-[12px] px-[24px] py-[16px] flex flex-col">
       <h2 className="text-[#0F172A] font-[600] text-[16px]">Last Records</h2>
       <hr></hr>
       {isReady && recordData.map((card, index) => (

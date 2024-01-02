@@ -48,6 +48,7 @@ export default function AddCatergoryIcons(props) {
     categoryValueAdd,
     setCategoryValueAdd,
     color_,
+    setIconID,
     setColor,
     isIcon,
     setIsIcon,
@@ -55,50 +56,51 @@ export default function AddCatergoryIcons(props) {
 
   const style = { color: color_ };
   const data = [
-    <TiHome {...{ style }} />,
-    <MdHomeFilled {...{ style }} />,
-    <RiContactsBook2Fill {...{ style }} />,
-    <MdContactMail {...{ style }} />,
-    <PiLadderFill {...{ style }} />,
-    <PiIntersectSquareFill {...{ style }} />,
-    <FaImage {...{ style }} />,
-    <FaMagnifyingGlassPlus {...{ style }} />,
-    <FaMicrophone {...{ style }} />,
-    <SiMicrosoftexcel {...{ style }} />,
-    <PiNotepadFill {...{ style }} />,
-    <ImMenu {...{ style }} />,
-    <PiLeafFill {...{ style }} />,
-    <PiNumberFiveFill {...{ style }} />,
-    <PiNumberCircleSevenFill {...{ style }} />,
-    <PiRoadHorizonFill {...{ style }} />,
-    <GiSandsOfTime {...{ style }} />,
-    <PiAnchorSimpleBold {...{ style }} />,
-    <PiTriangleFill {...{ style }} />,
-    <PiIntersectBold {...{ style }} />,
-    <BiLogoFlickrSquare {...{ style }} />,
-    <FaBaseballBall {...{ style }} />,
-    <AiFillQuestionCircle {...{ style }} />,
-    <TbSquareRoundedLetterA {...{ style }} />,
-    <BsWatch {...{ style }} />,
-    <PiGlobeSimpleFill {...{ style }} />,
-    <TbLemon {...{ style }} />,
-    <FaPeace {...{ style }} />,
-    <PiToiletPaperFill {...{ style }} />,
-    <FaPencilAlt {...{ style }} />,
+    { icon: <TiHome {...{ style }} />, id: 0 },
+    { icon: <MdHomeFilled {...{ style }} />, id: 1 },
+    { icon: <RiContactsBook2Fill {...{ style }} />, id: 2 },
+    { icon: <MdContactMail {...{ style }} />, id: 3 },
+    { icon: <PiLadderFill {...{ style }} />, id: 4 },
+    { icon: <PiIntersectSquareFill {...{ style }} />, id: 5 },
+    { icon: <FaImage {...{ style }} />, id: 6 },
+    { icon: <FaMagnifyingGlassPlus {...{ style }} />, id: 7 },
+    { icon: <FaMicrophone {...{ style }} />, id: 8 },
+    { icon: <SiMicrosoftexcel {...{ style }} />, id: 9 },
+    { icon: <PiNotepadFill {...{ style }} />, id: 10 },
+    { icon: <ImMenu {...{ style }} />, id: 11 },
+    { icon: <PiLeafFill {...{ style }} />, id: 12 },
+    { icon: <PiNumberFiveFill {...{ style }} />, id: 13 },
+    { icon: <PiNumberCircleSevenFill {...{ style }} />, id: 14 },
+    { icon: <PiRoadHorizonFill {...{ style }} />, id: 15 },
+    { icon: <GiSandsOfTime {...{ style }} />, id: 16 },
+    { icon: <PiAnchorSimpleBold {...{ style }} />, id: 17 },
+    { icon: <PiTriangleFill {...{ style }} />, id: 18 },
+    { icon: <PiIntersectBold {...{ style }} />, id: 19 },
+    { icon: <BiLogoFlickrSquare {...{ style }} />, id: 20 },
+    { icon: <FaBaseballBall {...{ style }} />, id: 21 },
+    { icon: <AiFillQuestionCircle {...{ style }} />, id: 22 },
+    { icon: <TbSquareRoundedLetterA {...{ style }} />, id: 23 },
+    { icon: <BsWatch {...{ style }} />, id: 24 },
+    { icon: <PiGlobeSimpleFill {...{ style }} />, id: 25 },
+    { icon: <TbLemon {...{ style }} />, id: 26 },
+    { icon: <FaPeace {...{ style }} />, id: 27 },
+    { icon: <PiToiletPaperFill {...{ style }} />, id: 28 },
+    { icon: <FaPencilAlt {...{ style }} />, id: 29 },
   ];
   return (
     <div className="w-[312px] h-[336px] bg-white flex flex-col p-[24px] absolute top-[74px] left-[22px] border-[2px] rounded-lg border-black">
       <div className="grid grid-row-5 grid-cols-6 h-[264px] w-full">
-        {data.map((icon, index) => (
+        {data.map((icons, index) => (
           <div
             key={index}
             className="w-[24px] h-[24px] cursor-pointer"
             onClick={() => {
-              setCategoryValueAdd(icon);
+              setCategoryValueAdd(icons.icon);
               setIsIcon(!isIcon);
+              setIconID(icons.id)
             }}
           >
-            {icon}
+            {icons.icon}
           </div>
         ))}
       </div>

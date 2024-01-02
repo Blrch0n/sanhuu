@@ -11,10 +11,15 @@ export default function AddCatergory() {
     AddCatergoryData,
     isIcon,
     setIsIcon,
-    getCategoryData
+    getCategoryData,
+    setCategoryInputValue,
   } = useContext(Context);
 
-  const [categoryInputValue, setCategoryInputValue] = useState("");
+  const submitHanler = async () => {
+    await AddCatergoryData();
+    await getCategoryData();
+    setIsAdd(false);
+  };
 
   return (
     <section className="absolute w-full h-full flex items-center justify-center top-0 bg-[#00000080]">
@@ -59,9 +64,7 @@ export default function AddCatergory() {
             type="submit"
             value="Add Category"
             onClick={() => {
-              AddCatergoryData(categoryValueAdd, categoryInputValue),
-                setIsAdd(false),
-                getCategoryData();
+              submitHanler();
             }}
             className="w-full h-[40px] rounded-[20px] bg-green-600 text-white"
           ></input>

@@ -12,6 +12,7 @@ export default function AddRecords() {
     category_value,
     isReady,
     setIsReady,
+    iconID,
     recordData,
     showOn,
     setRecordData,
@@ -25,17 +26,17 @@ export default function AddRecords() {
 
   const turnOn = async () => {
     try {
-      setIsReady(false)
+      setIsReady(false);
       const token = localStorage.getItem("token");
       console.log(token);
       const { data } = await api.post(
         "/records",
         {
           amount,
+          iconID,
           date,
           isExpense,
           time,
-          category_value,
           category_name,
         },
         {
@@ -111,18 +112,14 @@ export default function AddRecords() {
             <span className="w-full h-fit flex flex-col gap-[8px]">
               <p className="text-[#1F2937] font-[500] text-[16px]">Category</p>
               <div
-                className="select select-bordered w-full max-w-full h-[48px] relative"
+                className="w-full max-w-full h-[48px] flex flex-row items-center relative px-[12px] border-black border-[2px] rounded-lg"
                 onClick={(e) => {
                   e.preventDefault();
                   setIsCategory(!isCategory);
                 }}
               >
-                <div className="absolute top-[10px] left-[16px] w-full flex flex-row gap-[12px]">
-                  {category_value == "" ? (
-                    <p>Choose</p>
-                  ) : (
-                    <img src={`/${category_value}`}></img>
-                  )}
+                <div className="w-full h-full items-center flex flex-row gap-[12px]">
+                  {category_value == "" ? <p>Choose</p> : category_value}
                   <p>{category_name}</p>
                 </div>
                 {isCategory && <AddCatergoryScroll />}
