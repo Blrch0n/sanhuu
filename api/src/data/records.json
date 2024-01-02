@@ -1,0 +1,38 @@
+[
+  {
+    "amount": "214124",
+    "date": "2023-12-12",
+    "isExpense": true,
+    "time": "07:30",
+    "category_value": "food_add.svg",
+    "category_name": "Food",
+    "userEmail": "123"
+  },
+  {
+    "amount": "123",
+    "date": "2023-12-05",
+    "isExpense": true,
+    "time": "18:03",
+    "category_value": "drinnk.svg",
+    "category_name": "Drink",
+    "userEmail": "123"
+  },
+  {
+    "amount": "1231241",
+    "date": "2023-12-20",
+    "isExpense": true,
+    "time": "09:24",
+    "category_value": "taxi.svg",
+    "category_name": "Taxi",
+    "userEmail": "123"
+  },
+  {
+    "amount": "2134",
+    "date": "2023-12-12",
+    "isExpense": true,
+    "time": "21:25",
+    "category_value": "shopping.svg",
+    "category_name": "Shopping",
+    "userEmail": "123"
+  }
+]

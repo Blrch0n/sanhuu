@@ -1,5 +1,6 @@
 "use client";
 
+import { Context } from "@/app/layout";
 import { api } from "@/common/axios";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -11,6 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [isReady, setIsReady] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { showOn } = useContext(Context);
 
   const router = useRouter();
 
@@ -32,6 +34,7 @@ export const AuthProvider = ({ children }) => {
       setIsLoggedIn(true);
 
       router.push("/dashboard");
+      showOn()
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
@@ -39,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signUp = async (name,email, password) => {
+  const signUp = async (name, email, password) => {
     setIsLoading(true);
 
     try {
@@ -56,6 +59,7 @@ export const AuthProvider = ({ children }) => {
       setIsLoggedIn(true);
 
       router.push("/dashboard");
+      showOn()
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
@@ -69,7 +73,6 @@ export const AuthProvider = ({ children }) => {
     setIsLoggedIn(false);
 
     router.push("/");
-
   };
 
   useEffect(() => {
@@ -82,6 +85,8 @@ export const AuthProvider = ({ children }) => {
     }
 
     setIsReady(true);
+
+    showOn();
   }, []);
 
   return (

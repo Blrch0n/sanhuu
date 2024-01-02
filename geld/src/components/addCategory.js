@@ -8,10 +8,14 @@ export default function AddCatergory() {
     isAdd,
     setIsAdd,
     categoryValueAdd,
-    setCategoryValueAdd,
+    AddCatergoryData,
     isIcon,
     setIsIcon,
+    getCategoryData
   } = useContext(Context);
+
+  const [categoryInputValue, setCategoryInputValue] = useState("");
+
   return (
     <section className="absolute w-full h-full flex items-center justify-center top-0 bg-[#00000080]">
       <div className="w-[494px] min-h-[236px] bg-white rounded-[12px] flex flex-col">
@@ -43,15 +47,22 @@ export default function AddCatergory() {
                 className="w-[7.21px] h-[4.6px]"
               ></img>
             </div>
-            <select className="select select-bordered w-full max-w-xs">
-              <option>Name</option>
-              <option>Han Solo</option>
-              <option>Greedo</option>
-            </select>
+            <input
+              type="text"
+              onChange={(e) => {
+                setCategoryInputValue(e.target.value);
+              }}
+              className="select select-bordered w-full max-w-xs"
+            ></input>
           </div>
           <input
             type="submit"
             value="Add Category"
+            onClick={() => {
+              AddCatergoryData(categoryValueAdd, categoryInputValue),
+                setIsAdd(false),
+                getCategoryData();
+            }}
             className="w-full h-[40px] rounded-[20px] bg-green-600 text-white"
           ></input>
         </div>

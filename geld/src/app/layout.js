@@ -5,6 +5,7 @@ import { TiHome } from "react-icons/ti";
 import { createContext, useContext, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { AuthProvider } from "@/components/providers/AuthProvider";
+import { api } from "@/common/axios";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,17 +22,84 @@ export default function RootLayout({ children }) {
   const [categoryValueAdd, setCategoryValueAdd] = useState(<TiHome />);
   const [color_, setColor] = useState("#000000");
   const [isSelectAll, setIsSelectAll] = useState(true);
+  const [recordData, setRecordData] = useState();
+  const [isReady, setIsReady] = useState(false);
+  const [isReady_, setIsReady_] = useState(false);
+  const [categoryData, setCategoryData] = useState();
 
   const usePathName = usePathname();
 
+  const showOn = async () => {
+    setIsReady(false)
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await api.get("/records", {
+        headers: {
+          Authorization: token,
+        },
+      });
+      const { records } = data;
+
+      setRecordData(records);
+      setIsReady(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const AddCatergoryData = async (categoryValueAdd_, categoryInputValue) => {
+    try {
+      const token = localStorage.getItem("token");
+      console.log(categoryValueAdd_)
+      const { data } = await api.post(
+        "/category",
+        {
+          categoryValueAdd_,
+          categoryInputValue,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getCategoryData = async () => {
+    setIsReady_(false)
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await api.get("/category", {
+        headers: {
+          Authorization: token,
+        },
+      });
+      const { userCategory } = data;
+      setCategoryData(userCategory);
+      setIsReady_(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <Context.Provider
       value={{
         clickAdd,
         setClickAdd,
+        recordData,
+        showOn,
+        setRecordData,
+        getCategoryData,
+        categoryData,
         isExpense,
         setIsExpense,
+        isReady,
+        setIsReady,
         isAdd,
+        AddCatergoryData,
         setIsAdd,
         isprofile,
         setIsProfile,
@@ -51,7 +119,9 @@ export default function RootLayout({ children }) {
       }}
     >
       <html lang="en">
-        <body className={inter.className}><AuthProvider>{children}</AuthProvider></body>
+        <body className={inter.className}>
+          <AuthProvider>{children}</AuthProvider>
+        </body>
       </html>
     </Context.Provider>
   );

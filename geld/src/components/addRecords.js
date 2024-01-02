@@ -1,6 +1,7 @@
 import { Context } from "@/app/layout";
 import { useContext, useState } from "react";
 import AddCatergoryScroll from "./add_category";
+import { api } from "@/common/axios";
 
 export default function AddRecords() {
   const {
@@ -9,13 +10,45 @@ export default function AddRecords() {
     isExpense,
     setIsExpense,
     category_value,
-    setCategoryValue,
+    isReady,
+    setIsReady,
+    recordData,
+    showOn,
+    setRecordData,
     category_name,
-    setCategoryName,
-    setIsAdd,
   } = useContext(Context);
 
   const [isCategory, setIsCategory] = useState(false);
+  const [amount, setAmount] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+
+  const turnOn = async () => {
+    try {
+      setIsReady(false)
+      const token = localStorage.getItem("token");
+      console.log(token);
+      const { data } = await api.post(
+        "/records",
+        {
+          amount,
+          date,
+          isExpense,
+          time,
+          category_value,
+          category_name,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      showOn();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="absolute w-full h-full flex items-center justify-center top-0 bg-[#00000080]">
@@ -67,6 +100,9 @@ export default function AddRecords() {
                 type="text"
                 placeholder="₮ 000.00"
                 className="w-full h-full bg-[#D1D5DB] px-[16px] rounded-lg pt-[32px] pb-[12px] text-[#9CA3AF] text-[20px] font-[400]"
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                }}
               ></input>
               <p className="absolute text-[#171717] font-[600] text-[16px] top-[12px] left-[16px]">
                 Amount
@@ -95,11 +131,23 @@ export default function AddRecords() {
             <div className="w-full h-fit flex flex-row gap-[12px]">
               <span className="w-full h-fit flex flex-col gap-[8px]">
                 <p className="text-[#1F2937] font-[500] text-[16px]">Date</p>
-                <input type="date" className="w-full h-[48px]"></input>
+                <input
+                  type="date"
+                  className="w-full h-[48px]"
+                  onChange={(e) => {
+                    setDate(e.target.value);
+                  }}
+                ></input>
               </span>
               <span className="w-full h-fit flex flex-col gap-[8px]">
-                <p className="text-[#1F2937] font-[500] text-[16px]">Date</p>
-                <input type="time" className="w-full h-[48px]"></input>
+                <p className="text-[#1F2937] font-[500] text-[16px]">Time</p>
+                <input
+                  type="time"
+                  className="w-full h-[48px]"
+                  onChange={(e) => {
+                    setTime(e.target.value);
+                  }}
+                ></input>
               </span>
             </div>
             <input
@@ -110,6 +158,11 @@ export default function AddRecords() {
                 color: !isExpense ? "white" : "white",
               }}
               className="text-white bg-green-600 rounded-[20px] w-full h-[40px]"
+              onClick={(e) => {
+                e.preventDefault();
+                setClickAdd(false);
+                turnOn();
+              }}
             ></input>
           </div>
           <div className="w-full h-[444px] rounded-[12px] px-[24px] py-[20px]">

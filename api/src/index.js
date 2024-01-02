@@ -94,7 +94,8 @@ app.post("/records", async (req, res) => {
 
     const { email } = payload;
 
-    const { category, amount, type } = req.body;
+    const { amount, date, isExpense, time, category_value, category_name } =
+      req.body;
 
     const filePath = "src/data/records.json";
 
@@ -103,9 +104,12 @@ app.post("/records", async (req, res) => {
     const records = JSON.parse(recordsRaw);
 
     records.push({
-      type,
-      category,
       amount,
+      date,
+      isExpense,
+      time,
+      category_value,
+      category_name,
       userEmail: email,
     });
 
@@ -115,6 +119,38 @@ app.post("/records", async (req, res) => {
       message: "Record created",
     });
   } catch (error) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+});
+app.post("/category", async (req, res) => {
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.status(401).json({
+      message: "error",
+    });
+  }
+  try {
+    const verify = jwt.verify(authorization, "alkdgjkladjg");
+    const { email } = verify;
+    const { categoryValueAdd_, categoryInputValue } = req.body;
+    const filePath = "src/data/category.json";
+    const rawFile = await fs.readFile(filePath, "utf8");
+
+    const file = JSON.parse(rawFile);
+
+    file.push({
+      categoryValueAdd_,
+      categoryInputValue,
+      userEmail: email,
+    });
+
+    await fs.writeFile(filePath, JSON.stringify(file));
+    res.json({
+      message: "fine",
+    });
+  } catch (err) {
     return res.status(401).json({
       message: "Unauthorized",
     });
@@ -154,16 +190,16 @@ app.get("/users", async (req, res) => {
 });
 
 app.get("/records", async (req, res) => {
-  const { token } = req.headers;
+  const { authorization } = req.headers;
 
-  if (!token) {
+  if (!authorization) {
     return res.status(401).json({
       message: "Unauthorized",
     });
   }
 
   try {
-    const payload = jwt.verify(token, "alkdgjkladjg");
+    const payload = jwt.verify(authorization, "alkdgjkladjg");
 
     const { email } = payload;
 
@@ -181,6 +217,35 @@ app.get("/records", async (req, res) => {
   } catch (error) {
     return res.status(401).json({
       message: "Unauthorized",
+    });
+  }
+});
+app.get("/category", async (req, res) => {
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.status(401).json({
+      message: "error",
+    });
+  }
+  try {
+    const verify = jwt.verify(authorization, "alkdgjkladjg");
+
+    const { email } = verify;
+
+    const filePath = "src/data/category.json";
+
+    const rawFile = await fs.readFile(filePath, "utf-8");
+
+    const file = JSON.parse(rawFile);
+
+    const userCategory = file.filter((user) => user.userEmail === email);
+
+    res.json({
+      userCategory,
+    });
+  } catch (err) {
+    res.status(401).json({
+      message: "error1",
     });
   }
 });
