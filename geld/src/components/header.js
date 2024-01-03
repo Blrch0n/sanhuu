@@ -24,7 +24,7 @@ export default function Header() {
           <Link key={item} href={`/${item}`}>
             <p
               className="text-[#0F172A] text-[16px]"
-              style={{ fontWeight: pathname.includes(item) ? "800" : "400" }}
+              style={{ fontWeight: pathname.includes(item) ? "600" : "400" }}
             >
               {item.toUpperCase()}
             </p>

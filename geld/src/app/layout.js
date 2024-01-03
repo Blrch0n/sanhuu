@@ -29,6 +29,8 @@ export default function RootLayout({ children }) {
   const [categoryData, setCategoryData] = useState();
   const [categoryInputValue, setCategoryInputValue] = useState("");
 
+  const [filterType, setFilterType] = useState(["income", "expense"]);
+
   const usePathName = usePathname();
 
   const showOn = async () => {
@@ -48,7 +50,6 @@ export default function RootLayout({ children }) {
       console.log(err);
     }
   };
-
   const AddCatergoryData = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -69,7 +70,6 @@ export default function RootLayout({ children }) {
       console.log(err);
     }
   };
-
   const getCategoryData = async () => {
     setIsReady_(false);
     try {
@@ -111,6 +111,8 @@ export default function RootLayout({ children }) {
         setIsProfile,
         isIcon,
         setIsIcon,
+        filterType,
+        setFilterType,
         categoryInputValue,
         setCategoryInputValue,
         category_value,

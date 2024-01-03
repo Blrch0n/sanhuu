@@ -12,8 +12,8 @@ export default function Category() {
       </span>
       <div className="flex flex-col gap-[8px]">
         {isReady_ && categoryData.map((props, index) => (
-          <div className="flex flex-row justify-between w-full" key={index}>
-            <span className="flex flex-row w-full gap-[8px]">
+          <div className="flex flex-row justify-between w-full cursor-pointer items-center" key={index}>
+            <span className="flex flex-row w-full gap-[8px] h-full items-center">
               <img src='view_logo.svg' className="w-[20px] h-[20px]"></img>
               <p className="text-[#1F2937] font-[400] text-[16px]">
                 {props.categoryInputValue}

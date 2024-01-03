@@ -29,13 +29,14 @@ export default function AddRecords() {
       setIsReady(false);
       const token = localStorage.getItem("token");
       console.log(token);
+      const isExpense_ = isExpense ? 'expense':'income'; 
       const { data } = await api.post(
         "/records",
         {
           amount,
           iconID,
           date,
-          isExpense,
+          isExpense_,
           time,
           category_name,
         },

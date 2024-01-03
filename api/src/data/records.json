@@ -1,1 +1,47 @@
-[{"amount":"","date":"","iconID":10,"isExpense":true,"time":"","category_name":"sdsfgv","userEmail":"fdsafdas"},{"amount":"","date":"","iconID":23,"isExpense":true,"time":"","category_name":"fdsfds","userEmail":"fdsafdas"},{"amount":"","date":"","iconID":27,"isExpense":true,"time":"","category_name":"ffdsfds","userEmail":"fdsafdas"},{"amount":"","date":"","iconID":15,"isExpense":true,"time":"","category_name":"fdsf","userEmail":"fdsafdas"},{"amount":"","date":"","iconID":21,"isExpense":true,"time":"","category_name":"hfdsgdgf","userEmail":""}]
+[
+  {
+    "amount": "123566",
+    "date": "2024-01-12",
+    "iconID": 14,
+    "isExpense_": "expense",
+    "time": "14:54",
+    "category_name": "number1",
+    "userEmail": ""
+  },
+  {
+    "amount": "gdfsgd",
+    "date": "2024-01-27",
+    "iconID": 14,
+    "isExpense_": "expense",
+    "time": "15:58",
+    "category_name": "number1",
+    "userEmail": ""
+  },
+  {
+    "amount": "gfd",
+    "date": "",
+    "iconID": 0,
+    "isExpense_": "expense",
+    "time": "",
+    "category_name": "number2",
+    "userEmail": ""
+  },
+  {
+    "amount": "23523",
+    "date": "",
+    "iconID": 14,
+    "isExpense_": "income",
+    "time": "",
+    "category_name": "dfsg",
+    "userEmail": ""
+  },
+  {
+    "amount": "2543647589",
+    "date": "2024-01-03",
+    "iconID": 7,
+    "isExpense_": "income",
+    "time": "12:24",
+    "category_name": "rtyuturyeytutu",
+    "userEmail": ""
+  }
+]
