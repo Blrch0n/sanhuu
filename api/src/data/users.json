@@ -1,38 +1,8 @@
 [
   {
-    "id": "11eb3660-2e9b-47b1-a297-aefce3823ea1",
-    "name": "123",
-    "email": "123",
-    "password": "123"
-  },
-  {
-    "id": "ef52242a-e67f-4432-a8dc-0f18349e2913",
-    "name": "bolor_",
-    "email": "23@",
-    "password": "123"
-  },
-  {
-    "id": "f8290ad2-f400-47c3-82a9-968d7de2c10b",
-    "name": "",
-    "email": "",
-    "password": ""
-  },
-  {
-    "id": "b244854b-5b00-41ea-b21d-bc8182bf3451",
-    "name": "12345",
-    "email": "12345",
-    "password": "12345"
-  },
-  {
-    "id": "01f3b14f-5590-4e1b-832f-9714839d3a6f",
-    "name": "346236",
-    "email": "632432",
-    "password": "632423"
-  },
-  {
-    "id": "12dcadb8-2f56-405e-8410-4461aba92199",
-    "name": "fdsfasd",
-    "email": "fdsafdas",
-    "password": "fsdafds"
+    "id": "fe413e92-5e78-437e-883e-3fc28b007766",
+    "name": "Bolorchuluun",
+    "email": "bolor@12313.com",
+    "password": "Bolorchuluun1234"
   }
 ]

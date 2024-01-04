@@ -74,13 +74,13 @@ export default function LastRecord() {
     return objData.icon;
   };
   return (
-    <div className="w-full min-h-[400px] bg-white rounded-[12px] px-[24px] py-[16px] flex flex-col">
+    <div className="w-full h-[400px] overflow-scroll bg-white rounded-[12px] px-[24px] py-[16px] flex flex-col">
       <h2 className="text-[#0F172A] font-[600] text-[16px]">Last Records</h2>
       <hr></hr>
       {isReady &&
         recordData.map((card, index) => (
           <div
-            className="w-full h-[80px] flex flex-row justify-between items-center bt-[2px] b-black"
+            className="w-full py-[20px] flex flex-row justify-between items-center border-t-[2px] b-black"
             key={index}
           >
             <span className="flex max-w-full min-h-[40px] flex-row gap-[16px]">

@@ -38,9 +38,9 @@ export default function Profile() {
           as();
         }}
       >
-        <span>{isProfile && isProfile.id}</span>
-        <span>{isProfile && isProfile.name}</span>
-        <span>{isProfile && isProfile.email}</span>
+        <span>UserID:  {isProfile && isProfile.id}</span>
+        <span>UserName:  {isProfile && isProfile.name}</span>
+        <span>UserEmail:  {isProfile && isProfile.email}</span>
       </div>
     </section>
   );

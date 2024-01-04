@@ -28,6 +28,8 @@ export default function RootLayout({ children }) {
   const [isReady_, setIsReady_] = useState(false);
   const [categoryData, setCategoryData] = useState();
   const [categoryInputValue, setCategoryInputValue] = useState("");
+  const [search, setsearch] = useState("");
+  const [selectCategory, setSelectCategory] = useState("");
 
   const [filterType, setFilterType] = useState(["income", "expense"]);
 
@@ -109,6 +111,8 @@ export default function RootLayout({ children }) {
         setIsAdd,
         isprofile,
         setIsProfile,
+        selectCategory,
+        setSelectCategory,
         isIcon,
         setIsIcon,
         filterType,
@@ -125,6 +129,8 @@ export default function RootLayout({ children }) {
         setIsSelectAll,
         color_,
         setColor,
+        search,
+        setsearch,
         usePathName,
       }}
     >

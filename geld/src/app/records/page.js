@@ -7,12 +7,23 @@ import Header from "@/components/header";
 import Record from "@/components/records";
 import Today from "@/components/today";
 import Yesterday from "@/components/yesterday";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../layout";
 import AddCatergory from "@/components/addCategory";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/components/providers/AuthProvider";
 
 export default function RecordsPage() {
-  const {clickAdd, setClickAdd,isAdd, setIsAdd} =useContext(Context);
+  const { clickAdd, isAdd } = useContext(Context);
+
+  const { isLoggedIn } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLoggedIn) router.push("/");
+  }, [isLoggedIn]);
+
+  if (!isLoggedIn) return null;
   return (
     <section className="w-full h-fit bg-[#F3F4F6] min-h-screen relative">
       <Header></Header>

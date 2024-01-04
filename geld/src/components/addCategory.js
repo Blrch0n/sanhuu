@@ -22,7 +22,7 @@ export default function AddCatergory() {
   };
 
   return (
-    <section className="absolute w-full h-full flex items-center justify-center top-0 bg-[#00000080]">
+    <section className="fixed w-full h-screen flex items-center justify-center top-0 bg-[#00000080]">
       <div className="w-[494px] min-h-[236px] bg-white rounded-[12px] flex flex-col">
         <div className="w-full h-[68px] px-[24px] py-[20px] flex rounded-[12px] justify-between">
           <p className="color-[#0F172A] text-[20px] font-[600] ">

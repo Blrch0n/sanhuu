@@ -1,5 +1,5 @@
 import { Context } from "@/app/layout";
-import { useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import { MdHomeFilled } from "react-icons/md";
 import { TiHome } from "react-icons/ti";
@@ -30,7 +30,7 @@ import { PiGlobeSimpleFill } from "react-icons/pi";
 import { TbLemon } from "react-icons/tb";
 import { FaPeace } from "react-icons/fa";
 import { PiToiletPaperFill } from "react-icons/pi";
-import { FaPencilAlt } from "react-icons/fa"; 
+import { FaPencilAlt } from "react-icons/fa";
 
 const data = [
   { icon: <TiHome />, id: 0 },
@@ -66,7 +66,7 @@ const data = [
 ];
 
 export default function Today() {
-  const { recordData, isReady, filterType } =
+  const { recordData, isReady, search, filterType, selectCategory } =
     useContext(Context);
 
   const findData = (props) => {
@@ -75,6 +75,10 @@ export default function Today() {
     });
     return objData.icon;
   };
+
+  const NumberFormatter = (props)=>{
+
+  }
   return (
     <section className="w-full h-fit flex flex-col gap-[12px]">
       <h2 className="text-[16px] font-[600]">Today</h2>
@@ -82,6 +86,16 @@ export default function Today() {
       {isReady &&
         recordData
           .filter((item) => filterType.includes(item.isExpense_))
+          .filter((item) => {
+            return search.toLowerCase() === ""
+              ? item
+              : item.category_name.includes(search);
+          })
+          .filter((item) => {
+            return selectCategory.toLowerCase() === ""
+              ? item
+              : item.category_name.includes(selectCategory);
+          })
           .map((card, index) => (
             <div
               className="w-full h-[64px] flex flex-row justify-between items-center bg-white px-[24px] py-[12px] rounded-[12px]"
@@ -109,7 +123,8 @@ export default function Today() {
                 </span>
               </span>
               <p className="text-[#94A3B8] text-[16px] font-[600]">
-                {`${card.amount}₮`}
+                {`${NumberFormatter(card.amount)}₮`}
+                {}
               </p>
             </div>
           ))}
